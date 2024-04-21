@@ -18,8 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
+  final PageController _pageController =
+      PageController(initialPage: 1); // Set initial page to 1 (Create QR)
+  int _currentPage = 1;
 
   Future<void> _onSignOutPressed(BuildContext context) async {
     final qrData = await DatabaseHelper().getQRData();
@@ -75,8 +76,8 @@ class _HomePageState extends State<HomePage> {
             });
           },
           children: const [
-            ScanPage(),
             GeneratorPage(),
+            ScanPage(),
             AttendancePage(),
           ],
         ),
@@ -96,12 +97,12 @@ class _HomePageState extends State<HomePage> {
           },
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.qr_code_scanner),
-              label: 'Scan QR',
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.qr_code),
               label: 'Create QR',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.qr_code_scanner),
+              label: 'Scan QR',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.list),
